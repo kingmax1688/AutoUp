@@ -2,8 +2,32 @@
 import re
 import requests
 import os
+import subprocess
+import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from config import BACKUP_SOURCE_URL, CHECK_TIMEOUT, MAX_WORKERS, CHANNEL_ALIAS_MAP
+
+# ========== 尝试导入 config.py 中的配置，若不存在则使用默认值 ==========
+try:
+    from config import (
+        BACKUP_SOURCE_URL,
+        CHECK_TIMEOUT,
+        MAX_WORKERS,
+        CHANNEL_ALIAS_MAP,
+        MIN_WIDTH,
+        MIN_HEIGHT,
+        MIN_BITRATE,
+        ENABLE_QUALITY_CHECK,
+    )
+except ImportError:
+    # 默认配置
+    BACKUP_SOURCE_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/kingmax1688/iptv/refs/heads/main/itvlist.txt"
+    CHECK_TIMEOUT = 3
+    MAX_WORKERS = 20
+    CHANNEL_ALIAS_MAP = {}
+    MIN_WIDTH = 1920
+    MIN_HEIGHT = 1080
+    MIN_BITRATE = 2000          # kbps
+    ENABLE_QUALITY_CHECK = True
 
 PLAYLIST_FILE = "playlist.m3u"
 
@@ -37,7 +61,6 @@ def parse_m3u(file_path_or_url, is_url=False):
 
         # ----- 解析 M3U 格式 -----
         if line.startswith('#EXTINF'):
-            # 提取频道名（最后一个逗号后面的内容）
             if ',' in line:
                 name = line.split(',')[-1].strip()
             else:
@@ -52,12 +75,11 @@ def parse_m3u(file_path_or_url, is_url=False):
 
         # ----- 解析 TXT 格式（频道名,URL）-----
         if ',' in line:
-            parts = line.split(',', 1)  # 只分割第一个逗号
+            parts = line.split(',', 1)
             if len(parts) == 2:
                 name = parts[0].strip()
                 url = parts[1].strip()
                 if url.startswith('http'):
-                    # 应用别名映射
                     mapped_name = CHANNEL_ALIAS_MAP.get(name, name)
                     channels.append((mapped_name, url))
 
@@ -67,12 +89,65 @@ def parse_m3u(file_path_or_url, is_url=False):
 
 
 def check_url(url, timeout=CHECK_TIMEOUT):
-    """检测单个 URL 是否有效"""
+    """检测单个 URL 是否有效（HEAD请求）"""
     try:
-        # 使用 HEAD 请求，避免下载大量数据
         r = requests.head(url, timeout=timeout, allow_redirects=True)
         return r.status_code == 200
     except:
+        return False
+
+
+def get_stream_info(url):
+    """
+    使用 ffprobe 获取流媒体信息，返回 (width, height, bitrate_kbps)
+    如果失败则返回 (None, None, None)
+    """
+    try:
+        cmd = [
+            "ffprobe", "-v", "error",
+            "-select_streams", "v:0",
+            "-show_entries", "stream=width,height,bit_rate",
+            "-of", "json",
+            url
+        ]
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=10)
+        if result.returncode != 0:
+            return None, None, None
+
+        data = json.loads(result.stdout)
+        streams = data.get("streams", [])
+        if not streams:
+            return None, None, None
+
+        stream = streams[0]
+        width = stream.get("width")
+        height = stream.get("height")
+        bit_rate = stream.get("bit_rate")
+        bitrate_kbps = int(bit_rate) // 1000 if bit_rate else None
+        return width, height, bitrate_kbps
+    except Exception as e:
+        print(f"   ⚠️ ffprobe 检测失败 ({url[:60]}...): {e}")
+        return None, None, None
+
+
+def is_quality_acceptable(url):
+    """检测 URL 是否满足分辨率与码率阈值"""
+    if not ENABLE_QUALITY_CHECK:
+        return True
+
+    width, height, bitrate = get_stream_info(url)
+    if width is None:
+        print(f"   ❌ 无法获取视频信息，跳过候选源")
+        return False
+
+    width_ok = width >= MIN_WIDTH
+    height_ok = height >= MIN_HEIGHT
+    bitrate_ok = True if bitrate is None else bitrate >= MIN_BITRATE
+
+    if width_ok and height_ok and bitrate_ok:
+        return True
+    else:
+        print(f"   ❌ 质量不达标: {width}x{height} {bitrate}kbps (要求 {MIN_WIDTH}x{MIN_HEIGHT} {MIN_BITRATE}kbps)")
         return False
 
 
@@ -88,7 +163,7 @@ def build_backup_index(backup_url):
 
 
 def replace_failed_channels(playlist_file, backup_index):
-    """检测失效频道，从备用源替换"""
+    """检测失效频道，从备用源替换，并过滤质量"""
     channels = parse_m3u(playlist_file, is_url=False)
     print(f"📺 基准列表共有 {len(channels)} 个频道")
 
@@ -131,17 +206,26 @@ def replace_failed_channels(playlist_file, backup_index):
 
                 # 如果该 URL 失效，尝试替换
                 if current_name and not results.get((current_name, current_url), True):
-                    # 尝试从备用源中查找同名频道
                     if current_name in backup_index and backup_index[current_name]:
-                        new_url = backup_index[current_name][0]
-                        new_lines.append(new_url + '\n')
-                        replaced_count += 1
-                        print(f"🔄 替换 {current_name}: {current_url} → {new_url}")
+                        found = False
+                        for candidate_url in backup_index[current_name]:
+                            print(f"   🔍 检查候选源: {candidate_url[:80]}...")
+                            if is_quality_acceptable(candidate_url):
+                                new_lines.append(candidate_url + '\n')
+                                replaced_count += 1
+                                print(f"🔄 替换 {current_name}: {current_url} → {candidate_url}")
+                                found = True
+                                break
+                            else:
+                                print(f"   ⏭️ 跳过质量不达标的候选源")
+                        if not found:
+                            new_lines.append(url_line + '  # 已失效，备用源质量不达标\n')
+                            failed_count += 1
+                            print(f"⚠️ {current_name}: 备用源中所有候选质量均不达标")
                     else:
-                        # 备用源中也没有，保留原 URL 并注释标记
-                        new_lines.append(url_line + '  # 已失效，无替代\n')
+                        new_lines.append(url_line + '  # 已失效，备用源无此频道\n')
                         failed_count += 1
-                        print(f"⚠️ {current_name}: 备用源中无替代源")
+                        print(f"⚠️ {current_name}: 备用源中无此频道")
                 else:
                     new_lines.append(url_line + '\n')
         else:
