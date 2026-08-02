@@ -21,3 +21,11 @@ CHANNEL_ALIAS_MAP = {
     # "CCTV1综合": "CCTV-1 综合",
     # "东方卫视HD": "东方卫视",
 }
+
+# ========== 质量阈值 ==========
+MIN_WIDTH = 1920          # 最小宽度（像素），通常 1080P 对应 1920
+MIN_HEIGHT = 1080         # 最小高度（像素）
+MIN_BITRATE = 2000        # 最小码率（kbps），例如 2000 kbps = 2 Mbps
+
+# 是否启用质量检测（True/False）
+ENABLE_QUALITY_CHECK = True
