@@ -187,7 +187,7 @@ http://bigy.timwin.top:5400/rtp/239.3.1.249:8001
 http://221.7.175.154:85/tsfile/live/0113_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="CCTV-5+" tvg-name="CCTV-5+体育赛事" tvg-logo="https://png-1hf.pages.dev/CCTV-5+ 体育赛事.png" group-title="⚽️体育频道",CCTV-5+ 体育赛事
 http://221.7.175.154:85/tsfile/live/1018_1.m3u8?key=txiptv&playlive=1&authid=0
-#EXTINF:-1 tvg-id="CCTV-16" tvg-name="CCTV-16 奥林匹克" tvg-logo="https://png-1hf.pages.dev/CCTV-16 奥林匹克" group-title="⚽️体育频道",CCTV-16 奥林匹克
+#EXTINF:-1 tvg-id="CCTV-16" tvg-name="CCTV-16 奥林匹克" tvg-logo="https://png-1hf.pages.dev/CCTV-16 奥林匹克.png" group-title="⚽️体育频道",CCTV-16 奥林匹克
 http://www.alihomes.top:8188/rtp/239.254.96.170:8206
 #EXTINF:-1 tvg-id="风云足球" tvg-name="CCTV-风云足球" tvg-logo="https://png-1hf.pages.dev/CCTV-风云足球.png" group-title="⚽️体育频道",CCTV-风云足球
 http://198.204.228.26/live/fyzq.m3u8
