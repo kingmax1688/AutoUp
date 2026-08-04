@@ -6,10 +6,10 @@ import subprocess
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# ========== 尝试导入 config.py 中的配置，若不存在则使用默认值 ==========
+# ========== 尝试导入 config.py 中的配置 ==========
 try:
     from config import (
-        BACKUP_SOURCE_URL,
+        BACKUP_SOURCES,              # 新增：多源列表
         CHECK_TIMEOUT,
         MAX_WORKERS,
         CHANNEL_ALIAS_MAP,
@@ -19,14 +19,18 @@ try:
         ENABLE_QUALITY_CHECK,
     )
 except ImportError:
-    # 默认配置
-    BACKUP_SOURCE_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/kingmax1688/iptv/refs/heads/main/itvlist.txt"
+    # 向后兼容：如果 config.py 不存在或没有 BACKUP_SOURCES，使用单个备用源
+    BACKUP_SOURCES = None
+    try:
+        from config import BACKUP_SOURCE_URL
+    except ImportError:
+        BACKUP_SOURCE_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/kingmax1688/iptv/refs/heads/main/itvlist.m3u"
     CHECK_TIMEOUT = 3
     MAX_WORKERS = 20
     CHANNEL_ALIAS_MAP = {}
     MIN_WIDTH = 1920
     MIN_HEIGHT = 1080
-    MIN_BITRATE = 2000          # kbps
+    MIN_BITRATE = 2000
     ENABLE_QUALITY_CHECK = True
 
 PLAYLIST_FILE = "playlist.m3u"
@@ -35,9 +39,7 @@ PLAYLIST_FILE = "playlist.m3u"
 def parse_m3u(file_path_or_url, is_url=False):
     """
     解析 M3U 或 TXT 文件（本地或 URL），返回 [(频道名, URL)] 列表
-    支持两种格式：
-    - M3U格式：#EXTINF:-1,频道名\nURL
-    - TXT格式：频道名,URL
+    支持 M3U 格式（#EXTINF）和 TXT 格式（频道名,URL）
     """
     channels = []
     content = ""
@@ -59,7 +61,7 @@ def parse_m3u(file_path_or_url, is_url=False):
             i += 1
             continue
 
-        # ----- 解析 M3U 格式 -----
+        # 解析 M3U 格式
         if line.startswith('#EXTINF'):
             if ',' in line:
                 name = line.split(',')[-1].strip()
@@ -73,7 +75,7 @@ def parse_m3u(file_path_or_url, is_url=False):
             i += 1
             continue
 
-        # ----- 解析 TXT 格式（频道名,URL）-----
+        # 解析 TXT 格式（频道名,URL）
         if ',' in line:
             parts = line.split(',', 1)
             if len(parts) == 2:
@@ -82,7 +84,6 @@ def parse_m3u(file_path_or_url, is_url=False):
                 if url.startswith('http'):
                     mapped_name = CHANNEL_ALIAS_MAP.get(name, name)
                     channels.append((mapped_name, url))
-
         i += 1
 
     return channels
@@ -151,14 +152,58 @@ def is_quality_acceptable(url):
         return False
 
 
-def build_backup_index(backup_url):
-    """从备用源构建 {频道名: [URL1, URL2, ...]} 索引"""
-    channels = parse_m3u(backup_url, is_url=True)
+def build_backup_index(sources=None):
+    """
+    按优先级构建备用源索引
+    - 优先加载高优先级（priority 数值小）的源
+    - 如果频道已存在于索引中（来自高优先级源），则不再覆盖
+    - 支持两种调用方式：
+      1) 传入 sources 列表（推荐）
+      2) 如果没有传入，尝试使用单个 BACKUP_SOURCE_URL（向后兼容）
+    """
     index = {}
-    for name, url in channels:
-        if name not in index:
-            index[name] = []
-        index[name].append(url)
+
+    # 如果未传入 sources，尝试使用旧的 BACKUP_SOURCE_URL 模式
+    if sources is None:
+        try:
+            url = BACKUP_SOURCE_URL
+            print(f"📦 加载备用源（兼容模式）: {url}")
+            channels = parse_m3u(url, is_url=True)
+            for name, url in channels:
+                if name not in index:
+                    index[name] = []
+                if url not in index[name]:
+                    index[name].append(url)
+            return index
+        except Exception as e:
+            print(f"❌ 加载备用源失败: {e}")
+            return index
+
+    # 新模式：多源按优先级加载
+    # 按 priority 排序（数字小优先）
+    sorted_sources = sorted(sources, key=lambda x: x.get("priority", 999))
+
+    for source in sorted_sources:
+        name = source.get("name", "未知源")
+        url = source.get("url")
+        priority = source.get("priority", 999)
+        print(f"📦 加载备用源: {name} (优先级 {priority})")
+
+        try:
+            channels = parse_m3u(url, is_url=True)
+            added = 0
+            for ch_name, ch_url in channels:
+                # 如果该频道尚未被更高优先级的源覆盖，则添加
+                if ch_name not in index:
+                    index[ch_name] = []
+                # 去重
+                if ch_url not in index[ch_name]:
+                    index[ch_name].append(ch_url)
+                    added += 1
+            print(f"   ✅ 添加 {added} 条记录")
+        except Exception as e:
+            print(f"   ⚠️ 加载失败: {e}")
+
     return index
 
 
@@ -167,7 +212,7 @@ def replace_failed_channels(playlist_file, backup_index):
     channels = parse_m3u(playlist_file, is_url=False)
     print(f"📺 基准列表共有 {len(channels)} 个频道")
 
-    # ----- 并发检测所有频道 -----
+    # 并发检测所有频道
     results = {}  # {(name, url): is_valid}
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         futures = {executor.submit(check_url, url): (name, url) for name, url in channels}
@@ -178,7 +223,7 @@ def replace_failed_channels(playlist_file, backup_index):
             status = "✅" if is_valid else "❌"
             print(f"{status} {name}: {url}")
 
-    # ----- 读取原文件，逐行处理 -----
+    # 读取原文件，逐行处理
     with open(playlist_file, 'r', encoding='utf-8') as f:
         lines = f.readlines()
 
@@ -232,7 +277,7 @@ def replace_failed_channels(playlist_file, backup_index):
             new_lines.append(line)
             i += 1
 
-    # ----- 写回文件 -----
+    # 写回文件
     with open(playlist_file, 'w', encoding='utf-8') as f:
         f.writelines(new_lines)
 
@@ -242,16 +287,15 @@ def replace_failed_channels(playlist_file, backup_index):
 def main():
     print("📡 开始检测并替换失效源...")
 
-    # 从备用源构建索引
-    try:
-        backup_index = build_backup_index(BACKUP_SOURCE_URL)
-        total_urls = sum(len(v) for v in backup_index.values())
-        print(f"📦 备用源共有 {len(backup_index)} 个频道，{total_urls} 条 URL")
-    except Exception as e:
-        print(f"❌ 获取备用源失败: {e}")
-        return
+    # 构建备用源索引
+    # 优先使用多源模式（BACKUP_SOURCES），否则回退到兼容模式
+    if BACKUP_SOURCES:
+        backup_index = build_backup_index(BACKUP_SOURCES)
+    else:
+        backup_index = build_backup_index()  # 使用兼容模式
 
-    # 执行替换
+    total_urls = sum(len(v) for v in backup_index.values())
+    print(f"📦 备用源共有 {len(backup_index)} 个频道，{total_urls} 条 URL")
     replace_failed_channels(PLAYLIST_FILE, backup_index)
 
 
