@@ -13,8 +13,8 @@ BACKUP_SOURCES = [
         "priority": 2
     },
     {
-        "name": "zbds综合源",
-        "url": "https://live.zbds.top/tv/iptv4.m3u",
+        "name": "CCSH/IPTV综合源",
+        "url": "https://raw.githubusercontent.com/CCSH/IPTV/refs/heads/main/live.m3u",
         "priority": 3
     },
     # 可以继续添加更多备用源，按需要调整 priority 数值
