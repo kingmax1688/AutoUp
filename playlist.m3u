@@ -157,7 +157,7 @@ http://www.alihomes.top:8188/rtp/239.254.96.184:7158
 http://221.7.49.226:50085/tsfile/live/0016_2.m3u8?key=txiptv&amp;playlive=1&amp;authid=0
 #EXTINF:-1 tvg-id="CCTV-4K" tvg-name="CCTV-4K超高清" tvg-logo="https://png-1hf.pages.dev/CCTV4K.png" group-title="📡4K专区",CCTV-4K超高清
 http://183.203.166.28:9003/hls/10002/index.m3u8
-#EXTINF:-1 tvg-id="CCTV-16 4K" tvg-name="CCTV-16 4K奥林匹克" tvg-logo="https://png-1hf.pages.dev/CCTV16.png" group-title="📡4K专区",CCTV-16 4K奥林匹克
+#EXTINF:-1 tvg-id="CCTV-16 4K" tvg-name="CCTV-16 4K奥林匹克" tvg-logo="https://png-1hf.pages.dev/CCTV-16 奥林匹克.png" group-title="📡4K专区",CCTV-16 4K奥林匹克
 http://www.alihomes.top:8188/rtp/239.254.96.170:8206
 #EXTINF:-1 tvg-id="北京卫视4K" tvg-name="北京卫视4K" tvg-logo="https://png-1hf.pages.dev/北京卫视4K.png" group-title="📡4K专区",北京卫视4K
 http://www.alihomes.top:8188/rtp/239.254.96.158:8220
