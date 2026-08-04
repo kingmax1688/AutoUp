@@ -8,12 +8,12 @@ BACKUP_SOURCES = [
         "priority": 1
     },
     {
-        "name": "best-fan 聚合源",
+        "name": "zilong7728/Collect聚合源",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/zilong7728/Collect-IPTV/refs/heads/main/best_sorted.m3u",
         "priority": 2
     },
     {
-        "name": "ccav14 综合源",
+        "name": "zbds综合源",
         "url": "https://live.zbds.top/tv/iptv4.m3u",
         "priority": 3
     },
