@@ -208,14 +208,39 @@ def build_backup_index(sources=None):
 
 
 def replace_failed_channels(playlist_file, backup_index):
-    """检测失效频道，从备用源替换，并过滤质量"""
-    channels = parse_m3u(playlist_file, is_url=False)
-    print(f"📺 基准列表共有 {len(channels)} 个频道")
+    """检测失效频道，从备用源替换，并过滤质量（自动去重）"""
+    # 1. 读取原文件，按频道名去重，只保留第一个出现的条目
+    channels_dict = {}  # {频道名: (extinf_line, url)}
+    with open(playlist_file, 'r', encoding='utf-8') as f:
+        lines = f.readlines()
 
-    # 并发检测所有频道
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+        if line.startswith('#EXTINF'):
+            # 提取频道名（最后一个逗号后的内容）
+            if ',' in line:
+                name = line.split(',')[-1].strip()
+            else:
+                name = "未知频道"
+            i += 1
+            if i < len(lines):
+                url_line = lines[i].strip()
+                if url_line and not url_line.startswith('#'):
+                    # 如果该频道尚未记录，则保存
+                    if name not in channels_dict:
+                        channels_dict[name] = (line, url_line)
+                    # 否则跳过该频道（丢弃重复条目）
+        i += 1
+
+    # 2. 构建去重后的频道列表（保持原顺序）
+    unique_channels = [(name, data[0], data[1]) for name, data in channels_dict.items()]
+    print(f"📺 去重后共有 {len(unique_channels)} 个频道（原始行数可能更多）")
+
+    # 3. 并发检测所有频道的URL
     results = {}  # {(name, url): is_valid}
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = {executor.submit(check_url, url): (name, url) for name, url in channels}
+        futures = {executor.submit(check_url, url): (name, url) for name, extinf, url in unique_channels}
         for future in as_completed(futures):
             name, url = futures[future]
             is_valid = future.result()
@@ -223,61 +248,47 @@ def replace_failed_channels(playlist_file, backup_index):
             status = "✅" if is_valid else "❌"
             print(f"{status} {name}: {url}")
 
-    # 读取原文件，逐行处理
-    with open(playlist_file, 'r', encoding='utf-8') as f:
-        lines = f.readlines()
-
+    # 4. 生成新的播放列表（仅保留去重后的频道，且每个频道只保留一条URL）
     new_lines = []
-    i = 0
     replaced_count = 0
     failed_count = 0
 
-    while i < len(lines):
-        line = lines[i]
-        if line.startswith('#EXTINF'):
-            new_lines.append(line)
-            i += 1
-
-            if i < len(lines):
-                url_line = lines[i].strip()
-                current_url = url_line
-
-                # 查找当前 URL 对应的频道名
-                current_name = None
-                for (name, url), is_valid in results.items():
-                    if url == current_url:
-                        current_name = name
+    for name, extinf, current_url in unique_channels:
+        # 检查当前URL是否失效
+        if results.get((name, current_url), False) is False:  # 失效
+            # 尝试从备用源中查找可用URL
+            if name in backup_index and backup_index[name]:
+                found = False
+                for candidate_url in backup_index[name]:
+                    print(f"   🔍 检查候选源: {candidate_url[:80]}...")
+                    if is_quality_acceptable(candidate_url):
+                        # 替换成功
+                        new_lines.append(extinf + '\n')
+                        new_lines.append(candidate_url + '\n')
+                        replaced_count += 1
+                        print(f"🔄 替换 {name}: {current_url} → {candidate_url}")
+                        found = True
                         break
-
-                # 如果该 URL 失效，尝试替换
-                if current_name and not results.get((current_name, current_url), True):
-                    if current_name in backup_index and backup_index[current_name]:
-                        found = False
-                        for candidate_url in backup_index[current_name]:
-                            print(f"   🔍 检查候选源: {candidate_url[:80]}...")
-                            if is_quality_acceptable(candidate_url):
-                                new_lines.append(candidate_url + '\n')
-                                replaced_count += 1
-                                print(f"🔄 替换 {current_name}: {current_url} → {candidate_url}")
-                                found = True
-                                break
-                            else:
-                                print(f"   ⏭️ 跳过质量不达标的候选源")
-                        if not found:
-                            new_lines.append(url_line + '  # 已失效，备用源质量不达标\n')
-                            failed_count += 1
-                            print(f"⚠️ {current_name}: 备用源中所有候选质量均不达标")
                     else:
-                        new_lines.append(url_line + '  # 已失效，备用源无此频道\n')
-                        failed_count += 1
-                        print(f"⚠️ {current_name}: 备用源中无此频道")
-                else:
-                    new_lines.append(url_line + '\n')
+                        print(f"   ⏭️ 跳过质量不达标的候选源")
+                if not found:
+                    # 备用源中无合格源，保留原URL并标记
+                    new_lines.append(extinf + '\n')
+                    new_lines.append(current_url + '  # 已失效，备用源质量不达标\n')
+                    failed_count += 1
+                    print(f"⚠️ {name}: 备用源中所有候选质量均不达标")
+            else:
+                # 备用源中没有该频道
+                new_lines.append(extinf + '\n')
+                new_lines.append(current_url + '  # 已失效，备用源无此频道\n')
+                failed_count += 1
+                print(f"⚠️ {name}: 备用源中无此频道")
         else:
-            new_lines.append(line)
-            i += 1
+            # 当前URL有效，保留
+            new_lines.append(extinf + '\n')
+            new_lines.append(current_url + '\n')
 
-    # 写回文件
+    # 5. 写回文件
     with open(playlist_file, 'w', encoding='utf-8') as f:
         f.writelines(new_lines)
 
