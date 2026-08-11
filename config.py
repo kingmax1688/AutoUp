@@ -8,7 +8,7 @@ BACKUP_SOURCES = [
         "priority": 1
     },
     {
-        "name": "zilong7728/Collect聚合源",
+        "name": "组播源（B仓库）",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/kingmax1688/TV/refs/heads/main/my_tv/zubo_all.m3u",
         "priority": 2
     },
