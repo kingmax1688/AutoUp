@@ -1,3 +1,4 @@
+# replace.py
 import re
 import requests
 import os
@@ -39,6 +40,7 @@ def parse_m3u(file_path_or_url, is_url=False):
     """
     解析 M3U 或 TXT 文件（本地或 URL），返回 [(频道名, URL)] 列表
     支持 M3U 格式（#EXTINF）和 TXT 格式（频道名,URL）
+    优先从 tvg-name 属性提取频道名，若无则从逗号后提取
     """
     channels = []
     content = ""
@@ -62,10 +64,18 @@ def parse_m3u(file_path_or_url, is_url=False):
 
         # 解析 M3U 格式
         if line.startswith('#EXTINF'):
-            if ',' in line:
+            # 1. 优先从 tvg-name 属性中提取频道名
+            name = None
+            tvg_match = re.search(r'tvg-name="([^"]+)"', line)
+            if tvg_match:
+                name = tvg_match.group(1).strip()
+            # 2. 如果没有 tvg-name，则取逗号后的内容
+            if not name and ',' in line:
                 name = line.split(',')[-1].strip()
-            else:
+            # 3. 如果都没有，设为"未知频道"
+            if not name:
                 name = "未知频道"
+
             i += 1
             if i < len(lines):
                 url = lines[i].strip()
@@ -132,6 +142,10 @@ def get_stream_info(url):
 
 def is_quality_acceptable(url):
     """检测 URL 是否满足分辨率与码率阈值"""
+    # 组播源（包含 /rtp/ 或 /udp/）直接视为达标，跳过 ffprobe 检测
+    if '/rtp/' in url or '/udp/' in url:
+        return True
+
     if not ENABLE_QUALITY_CHECK:
         return True
 
@@ -225,7 +239,6 @@ def replace_failed_channels(playlist_file, backup_index):
             if i < len(lines):
                 url_line = lines[i].strip()
                 if url_line and not url_line.startswith('#'):
-                    # 只保留第一个出现的频道
                     if name not in channels_dict:
                         channels_dict[name] = (line, url_line)
         i += 1
