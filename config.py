@@ -9,7 +9,7 @@ BACKUP_SOURCES = [
     },
     {
         "name": "zilong7728/Collect聚合源",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/zilong7728/Collect-IPTV/refs/heads/main/best_sorted.m3u",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/kingmax1688/TV/refs/heads/main/my_tv/zubo_all.m3u",
         "priority": 2
     },
     {
