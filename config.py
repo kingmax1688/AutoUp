@@ -4,7 +4,7 @@
 BACKUP_SOURCES = [
     {
         "name": "酒店源 (B仓库)",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/kingmax1688/iptv/refs/heads/main/itvlist.m3u",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/kingmax1688/TV/refs/heads/main/Hotel/iptv.m3u",
         "priority": 1
     },
     {
