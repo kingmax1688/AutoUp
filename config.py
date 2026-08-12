@@ -28,3 +28,13 @@ MIN_WIDTH = 1920
 MIN_HEIGHT = 1080
 MIN_BITRATE = 2000
 ENABLE_QUALITY_CHECK = True
+
+IGNORE_CHANNELS = [
+    "经典港剧一",
+    "经典港剧二",
+    "经典港剧三",
+    "经典港剧四",
+    "经典港剧五",
+    "经典港剧六",
+    # 添加你不想参与检测和替换的频道名（必须与 playlist.m3u 中完全一致）
+]
