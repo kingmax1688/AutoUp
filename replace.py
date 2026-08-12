@@ -24,7 +24,7 @@ except ImportError:
     try:
         from config import BACKUP_SOURCE_URL
     except ImportError:
-        BACKUP_SOURCE_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/kingmax1688/iptv/refs/heads/main/itvlist.m3u"
+        BACKUP_SOURCE_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/kingmax1688/TV/refs/heads/main/Hotel/iptv.m3u"
     CHECK_TIMEOUT = 3
     MAX_WORKERS = 20
     CHANNEL_ALIAS_MAP = {}
