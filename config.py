@@ -14,7 +14,7 @@ BACKUP_SOURCES = [
     },
     {
         "name": "CCSH/IPTV综合源",
-        "url": "https://raw.githubusercontent.com/CCSH/IPTV/refs/heads/main/live.m3u",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/yuanzl77/IPTV/refs/heads/main/live.m3u",
         "priority": 3
     },
     # 可以继续添加更多备用源，按需要调整 priority 数值
