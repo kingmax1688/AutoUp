@@ -1,4 +1,3 @@
-# replace.py
 import re
 import requests
 import os
@@ -9,7 +8,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # ========== 尝试导入 config.py 中的配置 ==========
 try:
     from config import (
-        BACKUP_SOURCES,              # 新增：多源列表
+        BACKUP_SOURCES,
         CHECK_TIMEOUT,
         MAX_WORKERS,
         CHANNEL_ALIAS_MAP,
@@ -17,9 +16,10 @@ try:
         MIN_HEIGHT,
         MIN_BITRATE,
         ENABLE_QUALITY_CHECK,
+        IGNORE_CHANNELS,          # 忽略列表
     )
 except ImportError:
-    # 向后兼容：如果 config.py 不存在或没有 BACKUP_SOURCES，使用单个备用源
+    # 向后兼容
     BACKUP_SOURCES = None
     try:
         from config import BACKUP_SOURCE_URL
@@ -32,6 +32,7 @@ except ImportError:
     MIN_HEIGHT = 1080
     MIN_BITRATE = 2000
     ENABLE_QUALITY_CHECK = True
+    IGNORE_CHANNELS = []          # 默认空列表
 
 PLAYLIST_FILE = "playlist.m3u"
 
@@ -39,7 +40,6 @@ PLAYLIST_FILE = "playlist.m3u"
 def parse_m3u(file_path_or_url, is_url=False):
     """
     解析 M3U 或 TXT 文件（本地或 URL），返回 [(频道名, URL)] 列表
-    支持 M3U 格式（#EXTINF）和 TXT 格式（频道名,URL）
     优先从 tvg-name 属性提取频道名，若无则从逗号后提取
     """
     channels = []
@@ -64,15 +64,13 @@ def parse_m3u(file_path_or_url, is_url=False):
 
         # 解析 M3U 格式
         if line.startswith('#EXTINF'):
-            # 1. 优先从 tvg-name 属性中提取频道名
+            # 优先从 tvg-name 属性提取频道名
             name = None
             tvg_match = re.search(r'tvg-name="([^"]+)"', line)
             if tvg_match:
                 name = tvg_match.group(1).strip()
-            # 2. 如果没有 tvg-name，则取逗号后的内容
             if not name and ',' in line:
                 name = line.split(',')[-1].strip()
-            # 3. 如果都没有，设为"未知频道"
             if not name:
                 name = "未知频道"
 
@@ -176,7 +174,6 @@ def build_backup_index(sources=None):
     """
     index = {}
 
-    # 如果未传入 sources，尝试使用旧的 BACKUP_SOURCE_URL 模式
     if sources is None:
         try:
             url = BACKUP_SOURCE_URL
@@ -192,8 +189,6 @@ def build_backup_index(sources=None):
             print(f"❌ 加载备用源失败: {e}")
             return index
 
-    # 新模式：多源按优先级加载
-    # 按 priority 排序（数字小优先）
     sorted_sources = sorted(sources, key=lambda x: x.get("priority", 999))
 
     for source in sorted_sources:
@@ -206,10 +201,8 @@ def build_backup_index(sources=None):
             channels = parse_m3u(url, is_url=True)
             added = 0
             for ch_name, ch_url in channels:
-                # 如果该频道尚未被更高优先级的源覆盖，则添加
                 if ch_name not in index:
                     index[ch_name] = []
-                # 去重
                 if ch_url not in index[ch_name]:
                     index[ch_name].append(ch_url)
                     added += 1
@@ -221,85 +214,87 @@ def build_backup_index(sources=None):
 
 
 def replace_failed_channels(playlist_file, backup_index):
-    """检测失效频道，从备用源替换，并过滤质量（自动去重）"""
-    # 1. 读取原文件，按频道名去重，只保留第一个出现的条目
-    channels_dict = {}  # {频道名: (extinf_line, url)}
+    """
+    检测失效频道，从备用源替换，并过滤质量
+    - 不去重：每个条目独立处理，保留所有分组
+    - 跳过忽略列表中的频道（不检测不替换）
+    """
+    # 1. 读取原文件，逐行处理
     with open(playlist_file, 'r', encoding='utf-8') as f:
         lines = f.readlines()
 
-    i = 0
-    while i < len(lines):
-        line = lines[i].strip()
-        if line.startswith('#EXTINF'):
-            if ',' in line:
-                name = line.split(',')[-1].strip()
-            else:
-                name = "未知频道"
-            i += 1
-            if i < len(lines):
-                url_line = lines[i].strip()
-                if url_line and not url_line.startswith('#'):
-                    if name not in channels_dict:
-                        channels_dict[name] = (line, url_line)
-        i += 1
-
-    unique_channels = [(name, data[0], data[1]) for name, data in channels_dict.items()]
-    print(f"📺 去重后共有 {len(unique_channels)} 个频道（原始行数可能更多）")
-
-    # 2. 并发检测所有频道的URL
-    results = {}  # {(name, url): is_valid}
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = {executor.submit(check_url, url): (name, url) for name, extinf, url in unique_channels}
-        for future in as_completed(futures):
-            name, url = futures[future]
-            is_valid = future.result()
-            results[(name, url)] = is_valid
-            status = "✅" if is_valid else "❌"
-            print(f"{status} {name}: {url}")
-
-    # 3. 生成新的播放列表（仅保留去重后的频道，且每个频道只保留一条URL）
     new_lines = []
     replaced_count = 0
     failed_count = 0
 
-    for name, extinf, current_url in unique_channels:
-        # 剥离已有注释，只取纯净 URL
-        clean_url = current_url.split('#')[0].strip()
-        # 检查当前URL是否失效
-        if results.get((name, clean_url), False) is False:  # 失效
-            # 尝试从备用源中查找可用URL
-            if name in backup_index and backup_index[name]:
-                found = False
-                for candidate_url in backup_index[name]:
-                    print(f"   🔍 检查候选源: {candidate_url[:80]}...")
-                    if is_quality_acceptable(candidate_url):
-                        # 替换成功
-                        new_lines.append(extinf + '\n')
-                        new_lines.append(candidate_url + '\n')
-                        replaced_count += 1
-                        print(f"🔄 替换 {name}: {clean_url} → {candidate_url}")
-                        found = True
-                        break
-                    else:
-                        print(f"   ⏭️ 跳过质量不达标的候选源")
-                if not found:
-                    # 备用源中无合格源，保留原URL并标记
-                    new_lines.append(extinf + '\n')
-                    new_lines.append(clean_url + '  # 已失效，备用源质量不达标\n')
-                    failed_count += 1
-                    print(f"⚠️ {name}: 备用源中所有候选质量均不达标")
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if line.startswith('#EXTINF'):
+            # 提取频道名（逗号后的内容）
+            if ',' in line:
+                name = line.split(',')[-1].strip()
             else:
-                # 备用源中没有该频道
-                new_lines.append(extinf + '\n')
-                new_lines.append(clean_url + '  # 已失效，备用源无此频道\n')
-                failed_count += 1
-                print(f"⚠️ {name}: 备用源中无此频道")
-        else:
-            # 当前URL有效，保留
-            new_lines.append(extinf + '\n')
-            new_lines.append(clean_url + '\n')
+                # 尝试从 tvg-name 提取
+                tvg_match = re.search(r'tvg-name="([^"]+)"', line)
+                if tvg_match:
+                    name = tvg_match.group(1).strip()
+                else:
+                    name = "未知频道"
 
-    # 4. 写回文件
+            new_lines.append(line)  # 保留 #EXTINF 行
+            i += 1
+
+            if i < len(lines):
+                url_line = lines[i].strip()
+                # 剥离已有注释，只取纯净 URL
+                clean_url = url_line.split('#')[0].strip()
+                current_url = clean_url
+
+                # ----- 检查忽略列表 -----
+                if name in IGNORE_CHANNELS:
+                    new_lines.append(current_url + '\n')
+                    print(f"⏭️ 跳过 {name}（忽略列表）")
+                    i += 1
+                    continue
+
+                # ----- 检测有效性 -----
+                is_valid = check_url(current_url)
+
+                if is_valid:
+                    new_lines.append(current_url + '\n')
+                    print(f"✅ {name}: {current_url} 有效，保留")
+                else:
+                    # 失效，尝试从备用源替换
+                    if name in backup_index and backup_index[name]:
+                        found = False
+                        for candidate_url in backup_index[name]:
+                            print(f"   🔍 检查候选源: {candidate_url[:80]}...")
+                            if is_quality_acceptable(candidate_url):
+                                new_lines.append(candidate_url + '\n')
+                                replaced_count += 1
+                                print(f"🔄 替换 {name}: {current_url} → {candidate_url}")
+                                found = True
+                                break
+                            else:
+                                print(f"   ⏭️ 跳过质量不达标的候选源")
+                        if not found:
+                            new_lines.append(current_url + '  # 已失效，备用源质量不达标\n')
+                            failed_count += 1
+                            print(f"⚠️ {name}: 备用源中所有候选质量均不达标")
+                    else:
+                        new_lines.append(current_url + '  # 已失效，备用源无此频道\n')
+                        failed_count += 1
+                        print(f"⚠️ {name}: 备用源中无此频道")
+            else:
+                # 没有 URL 行，直接跳过
+                pass
+        else:
+            # 非 #EXTINF 行，直接保留
+            new_lines.append(line)
+            i += 1
+
+    # 2. 写回文件
     with open(playlist_file, 'w', encoding='utf-8') as f:
         f.writelines(new_lines)
 
@@ -310,11 +305,10 @@ def main():
     print("📡 开始检测并替换失效源...")
 
     # 构建备用源索引
-    # 优先使用多源模式（BACKUP_SOURCES），否则回退到兼容模式
     if BACKUP_SOURCES:
         backup_index = build_backup_index(BACKUP_SOURCES)
     else:
-        backup_index = build_backup_index()  # 使用兼容模式
+        backup_index = build_backup_index()
 
     total_urls = sum(len(v) for v in backup_index.values())
     print(f"📦 备用源共有 {len(backup_index)} 个频道，{total_urls} 条 URL")
