@@ -13,8 +13,8 @@ BACKUP_SOURCES = [
         "priority": 2
     },
     {
-        "name": "CCSH/IPTV综合源",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/yuanzl77/IPTV/refs/heads/main/live.m3u",
+        "name": "best-fan/iptv-sources",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/best-fan/iptv-sources/refs/heads/main/cn_all.m3u8",
         "priority": 3
     },
     # 可以继续添加更多备用源，按需要调整 priority 数值
