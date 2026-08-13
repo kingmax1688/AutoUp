@@ -16,7 +16,7 @@ try:
         MIN_HEIGHT,
         MIN_BITRATE,
         ENABLE_QUALITY_CHECK,
-        IGNORE_CHANNELS,          # 忽略列表
+        IGNORE_CHANNELS,          # 忽略列表（不参与检测和替换）
     )
 except ImportError:
     # 向后兼容
@@ -24,7 +24,7 @@ except ImportError:
     try:
         from config import BACKUP_SOURCE_URL
     except ImportError:
-        BACKUP_SOURCE_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/kingmax1688/TV/refs/heads/main/Hotel/iptv.m3u"
+        BACKUP_SOURCE_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/kingmax1688/iptv/refs/heads/main/itvlist.m3u"
     CHECK_TIMEOUT = 3
     MAX_WORKERS = 20
     CHANNEL_ALIAS_MAP = {}
@@ -216,10 +216,10 @@ def build_backup_index(sources=None):
 def replace_failed_channels(playlist_file, backup_index):
     """
     检测失效频道，从备用源替换，并过滤质量
-    - 不去重：每个条目独立处理，保留所有分组
+    - 不去重：保留所有分组，但每个 #EXTINF 条目只保留一个 URL
     - 跳过忽略列表中的频道（不检测不替换）
+    - 剥离已有注释，避免叠加
     """
-    # 1. 读取原文件，逐行处理
     with open(playlist_file, 'r', encoding='utf-8') as f:
         lines = f.readlines()
 
@@ -231,70 +231,96 @@ def replace_failed_channels(playlist_file, backup_index):
     while i < len(lines):
         line = lines[i]
         if line.startswith('#EXTINF'):
-            # 提取频道名（逗号后的内容）
-            if ',' in line:
-                name = line.split(',')[-1].strip()
-            else:
-                # 尝试从 tvg-name 提取
-                tvg_match = re.search(r'tvg-name="([^"]+)"', line)
-                if tvg_match:
-                    name = tvg_match.group(1).strip()
-                else:
-                    name = "未知频道"
-
-            new_lines.append(line)  # 保留 #EXTINF 行
+            # 保留 #EXTINF 行
+            new_lines.append(line)
             i += 1
 
+            # 处理紧随其后的第一个 URL 行
             if i < len(lines):
                 url_line = lines[i].strip()
-                # 剥离已有注释，只取纯净 URL
-                clean_url = url_line.split('#')[0].strip()
-                current_url = clean_url
+                # 检查是否是 URL 行（不以 # 开头且包含 http 或 rtp/udp 等）
+                if url_line and not url_line.startswith('#') and ('http' in url_line or 'rtp://' in url_line or 'udp://' in url_line):
+                    # 剥离已有注释，只取纯净 URL
+                    clean_url = url_line.split('#')[0].strip()
+                    current_url = clean_url
 
-                # ----- 检查忽略列表 -----
-                if name in IGNORE_CHANNELS:
-                    new_lines.append(current_url + '\n')
-                    print(f"⏭️ 跳过 {name}（忽略列表）")
-                    i += 1
-                    continue
+                    # 提取频道名（从 #EXTINF 行）
+                    name = None
+                    if ',' in line:
+                        name = line.split(',')[-1].strip()
+                    if not name:
+                        tvg_match = re.search(r'tvg-name="([^"]+)"', line)
+                        if tvg_match:
+                            name = tvg_match.group(1).strip()
+                    if not name:
+                        name = "未知频道"
 
-                # ----- 检测有效性 -----
-                is_valid = check_url(current_url)
-
-                if is_valid:
-                    new_lines.append(current_url + '\n')
-                    print(f"✅ {name}: {current_url} 有效，保留")
-                else:
-                    # 失效，尝试从备用源替换
-                    if name in backup_index and backup_index[name]:
-                        found = False
-                        for candidate_url in backup_index[name]:
-                            print(f"   🔍 检查候选源: {candidate_url[:80]}...")
-                            if is_quality_acceptable(candidate_url):
-                                new_lines.append(candidate_url + '\n')
-                                replaced_count += 1
-                                print(f"🔄 替换 {name}: {current_url} → {candidate_url}")
-                                found = True
-                                break
+                    # ----- 检查忽略列表 -----
+                    if name in IGNORE_CHANNELS:
+                        new_lines.append(current_url + '\n')
+                        print(f"⏭️ 跳过 {name}（忽略列表）")
+                        i += 1  # 跳过已处理的 URL 行
+                        # 继续跳过后续的多余 URL 行
+                        while i < len(lines) and not lines[i].startswith('#EXTINF'):
+                            next_line = lines[i].strip()
+                            if next_line and not next_line.startswith('#') and ('http' in next_line or 'rtp://' in next_line or 'udp://' in next_line):
+                                print(f"   ⏭️ 跳过多余的 URL 行: {next_line[:60]}...")
+                                i += 1
                             else:
-                                print(f"   ⏭️ 跳过质量不达标的候选源")
-                        if not found:
-                            new_lines.append(current_url + '  # 已失效，备用源质量不达标\n')
-                            failed_count += 1
-                            print(f"⚠️ {name}: 备用源中所有候选质量均不达标")
+                                break
+                        continue
+
+                    # ----- 检测有效性 -----
+                    is_valid = check_url(current_url)
+
+                    if is_valid:
+                        new_lines.append(current_url + '\n')
+                        print(f"✅ {name}: {current_url} 有效，保留")
                     else:
-                        new_lines.append(current_url + '  # 已失效，备用源无此频道\n')
-                        failed_count += 1
-                        print(f"⚠️ {name}: 备用源中无此频道")
+                        # 失效，尝试从备用源替换
+                        if name in backup_index and backup_index[name]:
+                            found = False
+                            for candidate_url in backup_index[name]:
+                                print(f"   🔍 检查候选源: {candidate_url[:80]}...")
+                                if is_quality_acceptable(candidate_url):
+                                    new_lines.append(candidate_url + '\n')
+                                    replaced_count += 1
+                                    print(f"🔄 替换 {name}: {current_url} → {candidate_url}")
+                                    found = True
+                                    break
+                                else:
+                                    print(f"   ⏭️ 跳过质量不达标的候选源")
+                            if not found:
+                                new_lines.append(current_url + '  # 已失效，备用源质量不达标\n')
+                                failed_count += 1
+                                print(f"⚠️ {name}: 备用源中所有候选质量均不达标")
+                        else:
+                            new_lines.append(current_url + '  # 已失效，备用源无此频道\n')
+                            failed_count += 1
+                            print(f"⚠️ {name}: 备用源中无此频道")
+
+                    i += 1  # 跳过已处理的 URL 行
+
+                    # ----- 跳过后续的多余 URL 行（直到下一个 #EXTINF） -----
+                    while i < len(lines) and not lines[i].startswith('#EXTINF'):
+                        next_line = lines[i].strip()
+                        if next_line and not next_line.startswith('#') and ('http' in next_line or 'rtp://' in next_line or 'udp://' in next_line):
+                            print(f"   ⏭️ 跳过多余的 URL 行: {next_line[:60]}...")
+                            i += 1
+                        else:
+                            break
+                else:
+                    # 如果没有有效的 URL 行，直接跳过
+                    print(f"⚠️ 跳过无 URL 的 #EXTINF: {line.strip()}")
             else:
-                # 没有 URL 行，直接跳过
+                # 文件结束，无需操作
                 pass
         else:
             # 非 #EXTINF 行，直接保留
             new_lines.append(line)
             i += 1
 
-    # 2. 写回文件
+    # 写回文件
     with open(playlist_file, 'w', encoding='utf-8') as f:
         f.writelines(new_lines)
 
