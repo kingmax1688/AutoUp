@@ -395,7 +395,7 @@ http://58.255.200.95:10443/tsfile/live/1003_1.m3u8?key=txiptv&playlive=1&authid=
 #EXTINF:-1 tvg-id="劲爆体育" tvg-name="劲爆体育" tvg-logo="https://png-1hf.pages.dev/劲爆体育.png" group-title="⚽️体育频道",劲爆体育
 http://221.7.49.226:50085/tsfile/live/0017_3.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="五星体育" tvg-name="五星体育" tvg-logo="https://png-1hf.pages.dev/五星体育.png" group-title="⚽️体育频道",五星体育
-http://139.227.21.22:9901/tsfile/live/1010_1.m3u8?key=txiptv&playlive=1&authid=0
+http://139.227.21.22:9901/tsfile/live/1010_1.m3u8?key=txiptv&playlive=1&authid=0 # 已失效
 #EXTINF:-1 tvg-id="五星体育" tvg-name="五星体育" tvg-logo="https://png-1hf.pages.dev/五星体育.png" group-title="⚽️体育频道",五星体育
 http://139.227.20.18:19999/地方/五星体育HD?cors
 #EXTINF:-1 tvg-id="北京体育" tvg-name="北京体育" tvg-logo="https://png-1hf.pages.dev/北京体育.png" group-title="⚽️体育频道",北京体育
@@ -431,7 +431,7 @@ http://111.8.242.127:9999/tsfile/live/1078_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="汽摩" tvg-name="汽摩" tvg-logo="https://png-1hf.pages.dev/汽摩.png" group-title="⚽️体育频道",汽摩
 http://home.660888.xyz:4000/udp/225.0.4.195:7980 # 已失效
 #EXTINF:-1 tvg-id="游戏风云" tvg-name="游戏风云" tvg-logo="https://png-1hf.pages.dev/游戏风云.png" group-title="⚽️体育频道",游戏风云
-http://111.8.242.127:9999/tsfile/live/1053_1.m3u8?key=txiptv&amp;playlive=1&amp;authid=0
+http://124.67.68.139:4022/udp/239.125.1.33:5000
 #EXTINF:-1 tvg-id="游戏风云" tvg-name="游戏风云" tvg-logo="https://png-1hf.pages.dev/游戏风云.png" group-title="⚽️体育频道",游戏风云
 http://139.227.20.18:19999/地方/游戏风云HD?cors
 #EXTINF:-1 tvg-name="CHC动作电影" tvg-logo="https://png-1hf.pages.dev/CHC动作电影.png" group-title="🎞️数字影视",CHC动作电影
