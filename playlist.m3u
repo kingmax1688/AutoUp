@@ -153,7 +153,7 @@ http://www.kooca.cn:5140/CCTV/CETV早期教育?cors
 #EXTINF:-1 tvg-id="CGTN记录" tvg-name="CGTN记录" tvg-logo="https://png-1hf.pages.dev/CGTN记录.png" group-title="📺央视频道",CGTN记录
 http://124.67.68.139:4022/udp/239.125.2.198:4120
 #EXTINF:-1 tvg-id="CGTN记录" tvg-name="CGTN记录" tvg-logo="https://png-1hf.pages.dev/CGTN记录.png" group-title="📺央视频道",CGTN记录
-http://www.pve.onetopcloud.com:16666/udp/239.125.2.198:4120
+http://tv.zhangzp.top:4022/udp/239.125.2.198:4120
 #EXTINF:-1 tvg-id="CGTN俄语" tvg-name="CGTN俄语" tvg-logo="https://png-1hf.pages.dev/CGTN俄语.png" group-title="📺央视频道",CGTN俄语
 http://124.67.68.139:4022/udp/239.125.2.203:4120
 #EXTINF:-1 tvg-id="CGTN俄语" tvg-name="CGTN俄语" tvg-logo="https://png-1hf.pages.dev/CGTN俄语.png" group-title="📺央视频道",CGTN俄语
@@ -165,15 +165,15 @@ http://124.67.68.139:4022/udp/239.125.2.199:4120
 #EXTINF:-1 tvg-id="CGTN法语" tvg-name="CGTN法语" tvg-logo="https://png-1hf.pages.dev/CGTN法语.png" group-title="📺央视频道",CGTN法语
 http://124.67.68.139:4022/udp/239.125.2.201:4120
 #EXTINF:-1 tvg-id="CGTN法语" tvg-name="CGTN法语" tvg-logo="https://png-1hf.pages.dev/CGTN法语.png" group-title="📺央视频道",CGTN法语
-http://www.pve.onetopcloud.com:16666/udp/239.125.2.201:4120
+http://tv.zhangzp.top:4022/udp/239.125.2.201:4120
 #EXTINF:-1 tvg-id="CGTN西班牙语" tvg-name="CGTN西班牙语" tvg-logo="https://png-1hf.pages.dev/CGTN西班牙语.png" group-title="📺央视频道",CGTN西班牙语
 http://124.67.68.139:4022/udp/239.125.2.200:4120
 #EXTINF:-1 tvg-id="CGTN西班牙语" tvg-name="CGTN西班牙语" tvg-logo="https://png-1hf.pages.dev/CGTN西班牙语.png" group-title="📺央视频道",CGTN西班牙语
-http://www.pve.onetopcloud.com:16666/udp/239.125.2.200:4120
+http://tv.zhangzp.top:4022/udp/239.125.2.200:4120
 #EXTINF:-1 tvg-id="CGTN阿拉伯语" tvg-name="CGTN阿拉伯语" tvg-logo="https://png-1hf.pages.dev/CGTN阿拉伯语.png" group-title="📺央视频道",CGTN阿拉伯语
 http://124.67.68.139:4022/udp/239.125.2.201:4120
 #EXTINF:-1 tvg-id="CGTN阿拉伯语" tvg-name="CGTN阿拉伯语" tvg-logo="https://png-1hf.pages.dev/CGTN阿拉伯语.png" group-title="📺央视频道",CGTN阿拉伯语
-http://www.pve.onetopcloud.com:16666/udp/239.125.2.201:4120
+http://tv.zhangzp.top:4022/udp/239.125.2.201:4120
 #EXTINF:-1 tvg-id="中国天气" tvg-name="中国天气" tvg-logo="https://png-1hf.pages.dev/中国天气.png" group-title="📺央视频道",中国天气
 http://221.7.49.226:50085/tsfile/live/0018_8.m3u8?key=txiptv&amp;playlive=1&amp;authid=0
 #EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://png-1hf.pages.dev/中国交通.png" group-title="📺央视频道",中国交通
@@ -323,7 +323,7 @@ http://110.72.84.22:808/hls/18/index.m3u8
 #EXTINF:-1 tvg-id="大湾区卫视" tvg-name="大湾区卫视" tvg-logo="https://png-1hf.pages.dev/大湾区卫视.png" group-title="📡卫视频道",大湾区卫视
 http://107.150.60.122/live/nfws.m3u8
 #EXTINF:-1 tvg-id="大湾区卫视" tvg-name="大湾区卫视" tvg-logo="https://png-1hf.pages.dev/大湾区卫视.png" group-title="📡卫视频道",大湾区卫视
-http://110.72.84.5:808/hls/81/index.m3u8
+http://110.72.84.5:808/hls/81/index.m3u8 # 已失效
 #EXTINF:-1 tvg-id="安多卫视" tvg-name="安多卫视" tvg-logo="https://png-1hf.pages.dev/安多卫视.png" group-title="📡卫视频道",安多卫视
 http://110.72.84.5:808/hls/4/index.m3u8
 #EXTINF:-1 tvg-id="安多卫视" tvg-name="安多卫视" tvg-logo="https://png-1hf.pages.dev/安多卫视.png" group-title="📡卫视频道",安多卫视
@@ -467,7 +467,7 @@ http://triq.cc:/rtp/239.3.1.100:8001
 #EXTINF:-1 tvg-name="华数热播剧场" tvg-logo="https://png-1hf.pages.dev/华数热播剧场.png" group-title="🎞️数字影视",华数热播剧场
 http://124.67.68.139:4022/udp/239.125.1.125:4130
 #EXTINF:-1 tvg-name="华数热播剧场" tvg-logo="https://png-1hf.pages.dev/华数热播剧场.png" group-title="🎞️数字影视",华数热播剧场
-http://www.pve.onetopcloud.com:16666/udp/239.125.1.125:4130
+http://tv.zhangzp.top:4022/udp/239.125.1.125:4130
 #EXTINF:-1 tvg-name="华数谍战剧场" tvg-logo="https://png-1hf.pages.dev/华数谍战剧场.png" group-title="🎞️数字影视",华数谍战剧场
 http://www.alihomes.top:8188/rtp/239.254.96.77:7600
 #EXTINF:-1 tvg-name="华数谍战剧场" tvg-logo="https://png-1hf.pages.dev/华数谍战剧场.png" group-title="🎞️数字影视",华数谍战剧场
@@ -491,15 +491,15 @@ http://124.67.68.139:4022/udp/239.125.1.145:4130
 #EXTINF:-1 tvg-name="华数精选" tvg-logo="https://png-1hf.pages.dev/华数精选.png" group-title="🎞️数字影视",华数精选
 http://124.67.68.139:4022/udp/239.125.1.43:5000
 #EXTINF:-1 tvg-name="华数精选" tvg-logo="https://png-1hf.pages.dev/华数精选.png" group-title="🎞️数字影视",华数精选
-http://www.pve.onetopcloud.com:16666/udp/239.125.1.43:5000
+http://tv.zhangzp.top:4022/udp/239.125.1.43:5000
 #EXTINF:-1 tvg-name="华数星影" tvg-logo="https://png-1hf.pages.dev/星影.png" group-title="🎞️数字影视",华数星影
 http://124.67.68.139:4022/udp/239.125.1.55:5000
 #EXTINF:-1 tvg-name="华数星影" tvg-logo="https://png-1hf.pages.dev/星影.png" group-title="🎞️数字影视",华数星影
-http://www.pve.onetopcloud.com:16666/udp/239.125.1.55:5000
+http://tv.zhangzp.top:4022/udp/239.125.1.55:5000
 #EXTINF:-1 tvg-name="华数光影" tvg-logo="https://png-1hf.pages.dev/光影.png" group-title="🎞️数字影视",华数光影
 http://124.67.68.139:4022/udp/239.125.1.49:5000
 #EXTINF:-1 tvg-name="华数光影" tvg-logo="https://png-1hf.pages.dev/光影.png" group-title="🎞️数字影视",华数光影
-http://www.pve.onetopcloud.com:16666/udp/239.125.1.49:5000
+http://tv.zhangzp.top:4022/udp/239.125.1.49:5000
 #EXTINF:-1 tvg-name="IPTV精品剧场" tvg-logo="https://png-1hf.pages.dev/IPTV精品剧场.png" group-title="🎞️数字影视",IPTV精品剧场
 http://112.27.5.218:9901/tsfile/live/faacts/1040_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="IPTV-精彩影视" tvg-logo="https://png-1hf.pages.dev/IPTV-精彩影视.png" group-title="🎞️数字影视",IPTV-精彩影视
@@ -537,7 +537,7 @@ http://triq.cc:/rtp/239.3.1.102:800
 #EXTINF:-1 tvg-name="华数少儿动画" tvg-logo="https://png-1hf.pages.dev/华数少儿动画.png" group-title="🎞️少儿频道",华数少儿动画
 http://124.67.68.139:4022/udp/239.125.1.121:4130
 #EXTINF:-1 tvg-name="华数少儿动画" tvg-logo="https://png-1hf.pages.dev/华数少儿动画.png" group-title="🎞️少儿频道",华数少儿动画
-http://www.pve.onetopcloud.com:16666/udp/239.125.1.121:4130
+http://tv.zhangzp.top:4022/udp/239.125.1.121:4130
 #EXTINF:-1 tvg-name="卡酷少儿" tvg-logo="https://png-1hf.pages.dev/卡酷少儿.png" group-title="🎞️少儿频道",卡酷少儿
 http://112.27.5.218:9901/tsfile/live/faacts/1035_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="卡酷少儿" tvg-logo="https://png-1hf.pages.dev/卡酷少儿.png" group-title="🎞️少儿频道",卡酷少儿
@@ -545,7 +545,7 @@ http://116.128.243.121:85/tsfile/live/1008_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://png-1hf.pages.dev/嘉佳卡通.png" group-title="🎞️少儿频道",嘉佳卡通
 http://124.67.68.139:4022/udp/239.125.2.213:4120
 #EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://png-1hf.pages.dev/嘉佳卡通.png" group-title="🎞️少儿频道",嘉佳卡通
-http://www.pve.onetopcloud.com:16666/udp/239.125.2.213:4120
+http://tv.zhangzp.top:4022/udp/239.125.2.213:4120
 #EXTINF:-1 tvg-name="金色学堂" tvg-logo="https://png-1hf.pages.dev/金色学堂.png" group-title="🎞️少儿频道",金色学堂
 http://112.27.5.218:9901/tsfile/live/faacts/1051_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="金色学堂" tvg-logo="https://png-1hf.pages.dev/金色学堂.png" group-title="🎞️少儿频道",金色学堂
