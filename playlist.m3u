@@ -327,7 +327,7 @@ http://110.72.84.5:808/hls/81/index.m3u8 # 已失效
 #EXTINF:-1 tvg-id="安多卫视" tvg-name="安多卫视" tvg-logo="https://png-1hf.pages.dev/安多卫视.png" group-title="📡卫视频道",安多卫视
 http://110.72.84.5:808/hls/4/index.m3u8
 #EXTINF:-1 tvg-id="安多卫视" tvg-name="安多卫视" tvg-logo="https://png-1hf.pages.dev/安多卫视.png" group-title="📡卫视频道",安多卫视
-http://110.72.84.5:808/hls/4/index.m3u8
+http://175.152.156.44:2715/rtp/239.0.0.109:5140
 #EXTINF:-1 tvg-id="康巴卫视" tvg-name="康巴卫视" tvg-logo="https://png-1hf.pages.dev/康巴卫视.png" group-title="📡卫视频道",康巴卫视
 http://175.152.156.44:2715/rtp/239.0.0.175:5140
 #EXTINF:-1 tvg-id="延边卫视" tvg-name="延边卫视" tvg-logo="https://png-1hf.pages.dev/延边卫视.png" group-title="📡卫视频道",延边卫视
@@ -359,7 +359,7 @@ http://8.138.7.223/tv/jsws4k.php
 #EXTINF:-1 tvg-id="江苏卫视4K" tvg-name="江苏卫视4K" tvg-logo="https://png-1hf.pages.dev/江苏卫视4K.png" group-title="📡4K专区",江苏卫视4K
 http://221.219.79.220:8888/rtp/239.3.1.113:3003 # 已失效
 #EXTINF:-1 tvg-id="湖南卫视4K" tvg-name="湖南卫视4K" tvg-logo="https://png-1hf.pages.dev/湖南卫视4K.png" group-title="📡4K专区",湖南卫视4K
-http://8.138.7.223/tv/api.php?id=hnws4k
+http://8.138.7.223/tv/api.php?id=hnws4k # 已失效
 #EXTINF:-1 tvg-id="湖南卫视4K" tvg-name="湖南卫视4K" tvg-logo="https://png-1hf.pages.dev/湖南卫视4K.png" group-title="📡4K专区",湖南卫视4K
 http://221.219.79.220:8888/rtp/239.3.1.112:3002 # 已失效
 #EXTINF:-1 tvg-id="山东卫视4K" tvg-name="山东卫视4K" tvg-logo="https://png-1hf.pages.dev/山东卫视4K.png" group-title="📡4K专区",山东卫视4K
@@ -539,7 +539,7 @@ http://124.67.68.139:4022/udp/239.125.1.121:4130
 #EXTINF:-1 tvg-name="华数少儿动画" tvg-logo="https://png-1hf.pages.dev/华数少儿动画.png" group-title="🎞️少儿频道",华数少儿动画
 http://tv.zhangzp.top:4022/udp/239.125.1.121:4130
 #EXTINF:-1 tvg-name="卡酷少儿" tvg-logo="https://png-1hf.pages.dev/卡酷少儿.png" group-title="🎞️少儿频道",卡酷少儿
-http://112.27.5.218:9901/tsfile/live/faacts/1035_1.m3u8?key=txiptv&playlive=1&authid=0
+http://175.152.156.44:2715/rtp/239.0.0.75:5140
 #EXTINF:-1 tvg-name="卡酷少儿" tvg-logo="https://png-1hf.pages.dev/卡酷少儿.png" group-title="🎞️少儿频道",卡酷少儿
 http://116.128.243.121:85/tsfile/live/1008_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://png-1hf.pages.dev/嘉佳卡通.png" group-title="🎞️少儿频道",嘉佳卡通
