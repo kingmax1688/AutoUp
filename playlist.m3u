@@ -154,26 +154,6 @@ http://www.kooca.cn:5140/CCTV/CETV早期教育?cors
 http://124.67.68.139:4022/udp/239.125.2.198:4120
 #EXTINF:-1 tvg-id="CGTN记录" tvg-name="CGTN记录" tvg-logo="https://png-1hf.pages.dev/CGTN记录.png" group-title="📺央视频道",CGTN记录
 http://tv.zhangzp.top:4022/udp/239.125.2.198:4120
-#EXTINF:-1 tvg-id="CGTN俄语" tvg-name="CGTN俄语" tvg-logo="https://png-1hf.pages.dev/CGTN俄语.png" group-title="📺央视频道",CGTN俄语
-http://124.67.68.139:4022/udp/239.125.2.203:4120
-#EXTINF:-1 tvg-id="CGTN俄语" tvg-name="CGTN俄语" tvg-logo="https://png-1hf.pages.dev/CGTN俄语.png" group-title="📺央视频道",CGTN俄语
-http://124.67.68.139:4022/udp/239.125.2.203:4120
-#EXTINF:-1 tvg-id="CGTN英语" tvg-name="CGTN英语" tvg-logo="https://png-1hf.pages.dev/CGTN英语.png" group-title="📺央视频道",CGTN英语
-http://124.67.68.139:4022/udp/239.125.2.199:4120
-#EXTINF:-1 tvg-id="CGTN英语" tvg-name="CGTN英语" tvg-logo="https://png-1hf.pages.dev/CGTN英语.png" group-title="📺央视频道",CGTN英语
-http://124.67.68.139:4022/udp/239.125.2.199:4120
-#EXTINF:-1 tvg-id="CGTN法语" tvg-name="CGTN法语" tvg-logo="https://png-1hf.pages.dev/CGTN法语.png" group-title="📺央视频道",CGTN法语
-http://124.67.68.139:4022/udp/239.125.2.201:4120
-#EXTINF:-1 tvg-id="CGTN法语" tvg-name="CGTN法语" tvg-logo="https://png-1hf.pages.dev/CGTN法语.png" group-title="📺央视频道",CGTN法语
-http://tv.zhangzp.top:4022/udp/239.125.2.201:4120
-#EXTINF:-1 tvg-id="CGTN西班牙语" tvg-name="CGTN西班牙语" tvg-logo="https://png-1hf.pages.dev/CGTN西班牙语.png" group-title="📺央视频道",CGTN西班牙语
-http://124.67.68.139:4022/udp/239.125.2.200:4120
-#EXTINF:-1 tvg-id="CGTN西班牙语" tvg-name="CGTN西班牙语" tvg-logo="https://png-1hf.pages.dev/CGTN西班牙语.png" group-title="📺央视频道",CGTN西班牙语
-http://tv.zhangzp.top:4022/udp/239.125.2.200:4120
-#EXTINF:-1 tvg-id="CGTN阿拉伯语" tvg-name="CGTN阿拉伯语" tvg-logo="https://png-1hf.pages.dev/CGTN阿拉伯语.png" group-title="📺央视频道",CGTN阿拉伯语
-http://124.67.68.139:4022/udp/239.125.2.201:4120
-#EXTINF:-1 tvg-id="CGTN阿拉伯语" tvg-name="CGTN阿拉伯语" tvg-logo="https://png-1hf.pages.dev/CGTN阿拉伯语.png" group-title="📺央视频道",CGTN阿拉伯语
-http://tv.zhangzp.top:4022/udp/239.125.2.201:4120
 #EXTINF:-1 tvg-id="中国天气" tvg-name="中国天气" tvg-logo="https://png-1hf.pages.dev/中国天气.png" group-title="📺央视频道",中国天气
 http://221.7.49.226:50085/tsfile/live/0018_8.m3u8?key=txiptv&amp;playlive=1&amp;authid=0
 #EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://png-1hf.pages.dev/中国交通.png" group-title="📺央视频道",中国交通
@@ -566,8 +546,6 @@ http://110.72.84.22:808/hls/31/index.m3u8
 http://221.7.175.154:85/tsfile/live/1016_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="金鹰卡通" tvg-logo="https://png-1hf.pages.dev/金鹰卡通.png" group-title="🎞️少儿频道",金鹰卡通
 http://116.128.243.121:85/tsfile/live/1007_1.m3u8?key=txiptv&playlive=1&authid=0
-#EXTINF:-1 tvg-id="CHANNEL[V]" tvg-name="CHANNEL[V]" tvg-logo="https://png-1hf.pages.dev/CHANNEL[V].png" group-title="☘️港澳台",CHANNEL[V]
-https://servilive.com:3263/live/channel12live.m3u8
 #EXTINF:-1 tvg-id="凤凰卫视中文台" tvg-name="凤凰卫视中文台" tvg-logo="https://png-1hf.pages.dev/凤凰中文台.png" group-title="☘️港澳台",凤凰卫视中文台
 http://221.7.175.154:85/tsfile/live/1020_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="凤凰卫视香港台" tvg-name="凤凰卫视香港台" tvg-logo="https://png-1hf.pages.dev/凤凰香港台.png" group-title="☘️港澳台",凤凰卫视香港台
