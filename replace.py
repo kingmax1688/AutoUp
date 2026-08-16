@@ -130,19 +130,37 @@ def get_stream_info(url):
         return None, None, None
 
 
+# ==================== 修改后的函数 ====================
 def is_quality_acceptable(url):
-    """质量检测，组播源直接通过"""
+    """
+    质量检测
+    - 组播源（rtp/udp）直接通过，不检测
+    - 酒店源（http）如果无法获取流信息，也放行（避免误杀）
+    - 只有能明确获取到流信息且不达标时才拒绝
+    """
+    # 组播源直接通过
     if '/rtp/' in url or '/udp/' in url:
         return True
+    
+    # 如果质量检测未开启，全部通过
     if not ENABLE_QUALITY_CHECK:
         return True
+    
+    # 酒店源（http）尝试获取流信息
     width, height, bitrate = get_stream_info(url)
+    
+    # 如果 ffprobe 获取不到信息（返回 None），放行（不误杀）
     if width is None:
-        return False
+        return True
+    
+    # 能获取到信息时，才进行质量判断
     if width >= MIN_WIDTH and height >= MIN_HEIGHT:
         if bitrate is None or bitrate >= MIN_BITRATE:
             return True
+    
+    # 明确不达标才拒绝
     return False
+# ==================== 修改结束 ====================
 
 
 def build_backup_index(sources=None):
