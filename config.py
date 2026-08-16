@@ -12,11 +12,6 @@ BACKUP_SOURCES = [
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/kingmax1688/TV/refs/heads/main/my_tv/zubo_all.m3u",
         "priority": 2
     },
-    {
-        "name": "zilong7728/Collect-IPTV",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/zilong7728/Collect-IPTV/refs/heads/main/best_sorted.m3u",
-        "priority": 3
-    },
     # 可以继续添加更多备用源，按需要调整 priority 数值
 ]
 
