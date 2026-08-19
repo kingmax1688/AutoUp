@@ -85,7 +85,7 @@ http://www.alihomes.top:8188/rtp/239.254.96.58:7448 # 已失效
 #EXTINF:-1 tvg-id="中国天气" tvg-name="中国天气" tvg-logo="https://png-1hf.pages.dev/中国天气.png" group-title="📺央视频道",中国天气
 http://221.7.49.226:50085/tsfile/live/0018_8.m3u8?key=txiptv&amp;playlive=1&amp;authid=0
 #EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://png-1hf.pages.dev/中国交通.png" group-title="📺央视频道",中国交通
-http://221.219.148.78:8888/rtp/239.3.1.188:8001
+http://123.118.58.227:8686/rtp/239.3.1.188:8001
 #EXTINF:-1 tvg-id="北京卫视" tvg-name="北京卫视" tvg-logo="https://png-1hf.pages.dev/北京卫视.png" group-title="📡卫视频道",北京卫视
 http://221.7.175.154:85/tsfile/live/0136_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://png-1hf.pages.dev/东方卫视.png" group-title="📡卫视频道",东方卫视
@@ -159,7 +159,7 @@ http://123.12.11.60:85/tsfile/live/1029_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="海峡卫视" tvg-name="海峡卫视" tvg-logo="https://png-1hf.pages.dev/海峡卫视.png" group-title="📡卫视频道",海峡卫视
 http://218.104.239.114:9901/tsfile/live/0150_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="农林卫视" tvg-name="农林卫视" tvg-logo="https://png-1hf.pages.dev/农林卫视.png" group-title="📡卫视频道",农林卫视
-http://110.72.84.5:808/hls/18/index.m3u8
+http://110.72.74.180:808/hls/18/index.m3u8
 #EXTINF:-1 tvg-id="大湾区卫视" tvg-name="大湾区卫视" tvg-logo="https://png-1hf.pages.dev/大湾区卫视.png" group-title="📡卫视频道",大湾区卫视
 http://110.72.74.180:808/hls/81/index.m3u8
 #EXTINF:-1 tvg-id="安多卫视" tvg-name="安多卫视" tvg-logo="https://png-1hf.pages.dev/安多卫视.png" group-title="📡卫视频道",安多卫视
@@ -167,7 +167,7 @@ http://110.72.74.180:808/hls/4/index.m3u8
 #EXTINF:-1 tvg-id="康巴卫视" tvg-name="康巴卫视" tvg-logo="https://png-1hf.pages.dev/康巴卫视.png" group-title="📡卫视频道",康巴卫视
 http://39.164.143.66:13994/tsfile/live/0134_1.m3u8?key=txiptv&playlive=1&authid=0 # 已失效
 #EXTINF:-1 tvg-id="延边卫视" tvg-name="延边卫视" tvg-logo="https://png-1hf.pages.dev/延边卫视.png" group-title="📡卫视频道",延边卫视
-http://139.227.20.18:19999/卫视/延边卫视?cors
+http://139.227.20.18:19999/卫视/延边卫视?cors # 已失效
 #EXTINF:-1 tvg-id="新视觉" tvg-name="新视觉" tvg-logo="https://png-1hf.pages.dev/新视觉.png" group-title="📡卫视频道",新视觉
 http://221.7.49.226:50085/tsfile/live/0016_2.m3u8?key=txiptv&amp;playlive=1&amp;authid=0
 #EXTINF:-1 tvg-id="北京卫视4K" tvg-name="北京卫视4K" tvg-logo="https://png-1hf.pages.dev/北京卫视4K.png" group-title="📡4K专区",北京卫视4K
@@ -191,7 +191,7 @@ http://www.pve.onetopcloud.com:16666/udp/239.125.1.236:4120
 #EXTINF:-1 tvg-name="爱上4K" tvg-logo="https://png-1hf.pages.dev/爱上4K.png" group-title="📡4K专区",爱上4K
 http://www.alihomes.top:8188/rtp/239.254.96.193:8182
 #EXTINF:-1 tvg-name="淘4K" tvg-logo="https://png-1hf.pages.dev/淘4K.png" group-title="📡4K专区",淘4K
-http://221.219.148.78:8888/rtp/239.3.1.249:8001
+http://123.118.58.227:8686/rtp/239.3.1.249:8001
 #EXTINF:-1 tvg-id="多彩文体4K" tvg-name="多彩文体4K" tvg-logo="https://png-1hf.pages.dev/多彩文体4K.png" group-title="📡4K专区",多彩文体4K
 http://home.660888.xyz:4000/udp/225.0.4.234:7980 # 已失效
 #EXTINF:-1 tvg-id="CCTV-5" tvg-name="CCTV-5 体育" tvg-logo="https://png-1hf.pages.dev/CCTV-5 体育.png" group-title="⚽️体育频道",CCTV-5 体育
@@ -211,7 +211,7 @@ http://58.255.200.180:10443/tsfile/live/1003_1.m3u8?key=txiptv&playlive=1&authid
 #EXTINF:-1 tvg-id="劲爆体育" tvg-name="劲爆体育" tvg-logo="https://png-1hf.pages.dev/劲爆体育.png" group-title="⚽️体育频道",劲爆体育
 http://221.7.49.226:50085/tsfile/live/0017_3.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="五星体育" tvg-name="五星体育" tvg-logo="https://png-1hf.pages.dev/五星体育.png" group-title="⚽️体育频道",五星体育
-http://223.166.244.186:8001/rtp/233.18.204.58:5140
+http://223.166.244.186:8001/rtp/233.18.204.58:5140 # 已失效
 #EXTINF:-1 tvg-id="北京体育" tvg-name="北京体育" tvg-logo="https://png-1hf.pages.dev/北京体育.png" group-title="⚽️体育频道",北京体育
 http://114.245.198.169:85/tsfile/live/25/1025_1.m3u8?key=txiptv
 #EXTINF:-1 tvg-id="睛彩青少" tvg-name="睛彩青少" tvg-logo="https://png-1hf.pages.dev/睛彩青少.png" group-title="⚽️体育频道",睛彩青少
@@ -229,7 +229,7 @@ http://cdn6.163189.xyz/163189/amty
 #EXTINF:-1 tvg-id="快乐垂钓" tvg-name="快乐垂钓" tvg-logo="https://png-1hf.pages.dev/快乐垂钓.png" group-title="⚽️体育频道",快乐垂钓
 http://60.30.67.45:8834/udp/225.1.1.92:5002
 #EXTINF:-1 tvg-id="汽摩" tvg-name="汽摩" tvg-logo="https://png-1hf.pages.dev/汽摩.png" group-title="⚽️体育频道",汽摩
-http://home.660888.xyz:4000/udp/225.0.4.195:7980
+http://58.17.134.3:8005/udp/225.0.4.195:7980
 #EXTINF:-1 tvg-id="游戏风云" tvg-name="游戏风云" tvg-logo="https://png-1hf.pages.dev/游戏风云.png" group-title="⚽️体育频道",游戏风云
 http://www.pve.onetopcloud.com:16666/udp/239.125.1.33:5000
 #EXTINF:-1 tvg-name="CHC动作电影" tvg-logo="https://png-1hf.pages.dev/CHC动作电影.png" group-title="🎞️数字影视",CHC动作电影
@@ -241,11 +241,11 @@ http://112.27.5.218:9901/tsfile/live/faacts/1038_1.m3u8?key=txiptv&playlive=1&au
 #EXTINF:-1 tvg-name="重温经典" tvg-logo="https://png-1hf.pages.dev/重温经典.png" group-title="🎞️数字影视",重温经典
 http://221.7.49.226:50085/tsfile/live/0018_3.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="淘电影" tvg-logo="https://png-1hf.pages.dev/淘电影.png" group-title="🎞️数字影视",淘电影
-http://221.219.148.78:8888/rtp/239.3.1.250:8001
+http://123.118.58.227:8686/rtp/239.3.1.250:8001
 #EXTINF:-1 tvg-name="淘剧场" tvg-logo="https://png-1hf.pages.dev/淘剧场.png" group-title="🎞️数字影视",淘剧场
-http://221.219.148.78:8888/rtp/239.3.1.95:8001
+http://123.118.58.227:8686/rtp/239.3.1.95:8001
 #EXTINF:-1 tvg-name="淘娱乐" tvg-logo="https://png-1hf.pages.dev/淘娱乐.png" group-title="🎞️数字影视",淘娱乐
-http://221.219.148.78:8888/rtp/239.3.1.100:8001
+http://123.118.58.227:8686/rtp/239.3.1.100:8001
 #EXTINF:-1 tvg-name="华数热播剧场" tvg-logo="https://png-1hf.pages.dev/华数热播剧场.png" group-title="🎞️数字影视",华数热播剧场
 http://www.pve.onetopcloud.com:16666/udp/239.125.1.125:4130
 #EXTINF:-1 tvg-name="华数谍战剧场" tvg-logo="https://png-1hf.pages.dev/华数谍战剧场.png" group-title="🎞️数字影视",华数谍战剧场
@@ -277,9 +277,9 @@ http://116.128.243.121:85/tsfile/live/1006_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="法治天地" tvg-logo="https://png-1hf.pages.dev/法治天地.png" group-title="🎞️数字影视",法治天地
 http://60.30.67.45:8834/udp/225.1.1.237:5002
 #EXTINF:-1 tvg-name="求索记录" tvg-logo="https://png-1hf.pages.dev/求索记录.png" group-title="🎞️数字影视",求索记录
-http://home.660888.xyz:4000/udp/225.0.4.232:7980
+http://58.17.134.3:8005/udp/225.0.4.232:7980
 #EXTINF:-1 tvg-name="淘BABY" tvg-logo="https://png-1hf.pages.dev/淘BABY.png" group-title="🎞️少儿频道",淘BABY
-http://221.219.148.78:8888/rtp/239.3.1.238:8001
+http://123.118.58.227:8686/rtp/239.3.1.238:8001
 #EXTINF:-1 tvg-name="华数少儿动画" tvg-logo="https://png-1hf.pages.dev/华数少儿动画.png" group-title="🎞️少儿频道",华数少儿动画
 http://www.alihomes.top:8188/rtp/239.254.96.79:7616
 #EXTINF:-1 tvg-name="卡酷少儿" tvg-logo="https://png-1hf.pages.dev/卡酷少儿.png" group-title="🎞️少儿频道",卡酷少儿
