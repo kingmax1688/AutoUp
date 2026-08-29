@@ -229,7 +229,7 @@ http://cdn6.163189.xyz/163189/amty
 #EXTINF:-1 tvg-id="快乐垂钓" tvg-name="快乐垂钓" tvg-logo="https://png-1hf.pages.dev/快乐垂钓.png" group-title="⚽️体育频道",快乐垂钓
 http://60.30.67.45:8834/udp/225.1.1.92:5002
 #EXTINF:-1 tvg-id="汽摩" tvg-name="汽摩" tvg-logo="https://png-1hf.pages.dev/汽摩.png" group-title="⚽️体育频道",汽摩
-http://58.17.134.3:8005/udp/225.0.4.195:7980
+http://home.660888.xyz:4000/udp/225.0.4.195:7980
 #EXTINF:-1 tvg-id="游戏风云" tvg-name="游戏风云" tvg-logo="https://png-1hf.pages.dev/游戏风云.png" group-title="⚽️体育频道",游戏风云
 http://tv.zhangzp.top:4022/udp/239.125.1.33:5000
 #EXTINF:-1 tvg-name="CHC动作电影" tvg-logo="https://png-1hf.pages.dev/CHC动作电影.png" group-title="🎞️数字影视",CHC动作电影
@@ -277,7 +277,7 @@ http://116.128.243.121:85/tsfile/live/1006_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="法治天地" tvg-logo="https://png-1hf.pages.dev/法治天地.png" group-title="🎞️数字影视",法治天地
 http://60.30.67.45:8834/udp/225.1.1.237:5002
 #EXTINF:-1 tvg-name="求索记录" tvg-logo="https://png-1hf.pages.dev/求索记录.png" group-title="🎞️数字影视",求索记录
-http://58.17.134.3:8005/udp/225.0.4.232:7980
+http://home.660888.xyz:4000/udp/225.0.4.232:7980
 #EXTINF:-1 tvg-name="淘BABY" tvg-logo="https://png-1hf.pages.dev/淘BABY.png" group-title="🎞️少儿频道",淘BABY
 http://123.120.49.149:4022/rtp/239.3.1.238:8001
 #EXTINF:-1 tvg-name="华数少儿动画" tvg-logo="https://png-1hf.pages.dev/华数少儿动画.png" group-title="🎞️少儿频道",华数少儿动画
