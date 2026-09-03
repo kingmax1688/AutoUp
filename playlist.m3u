@@ -77,7 +77,7 @@ http://198.204.228.26/live/cetv2.m3u8
 #EXTINF:-1 tvg-id="CETV3" tvg-name="CETV3" tvg-logo="https://png-1hf.pages.dev/CETV3.png" group-title="📺央视频道",CETV3
 http://198.204.228.26/live/cetv3.m3u8
 #EXTINF:-1 tvg-id="CETV4" tvg-name="CETV4" tvg-logo="https://png-1hf.pages.dev/CETV4.png" group-title="📺央视频道",CETV4
-http://vpn.famcloud.top:9878/rtp/239.3.1.56:4120
+http://123.120.49.149:4022/rtp/239.3.1.56:4120
 #EXTINF:-1 tvg-id="CETV早期教育" tvg-name="CETV早期教育" tvg-logo="https://png-1hf.pages.dev/CETV早期教育.png" group-title="📺央视频道",CETV早期教育
 http://60.30.67.45:8834/udp/225.1.2.207:5002 # 已失效
 #EXTINF:-1 tvg-id="CGTN记录" tvg-name="CGTN记录" tvg-logo="https://png-1hf.pages.dev/CGTN记录.png" group-title="📺央视频道",CGTN记录
@@ -85,7 +85,7 @@ http://www.alihomes.top:8188/rtp/239.254.96.58:7448 # 已失效
 #EXTINF:-1 tvg-id="中国天气" tvg-name="中国天气" tvg-logo="https://png-1hf.pages.dev/中国天气.png" group-title="📺央视频道",中国天气
 http://221.7.49.226:50085/tsfile/live/0018_8.m3u8?key=txiptv&amp;playlive=1&amp;authid=0
 #EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://png-1hf.pages.dev/中国交通.png" group-title="📺央视频道",中国交通
-http://vpn.famcloud.top:9878/rtp/239.3.1.188:8001
+http://123.120.49.149:4022/rtp/239.3.1.188:8001
 #EXTINF:-1 tvg-id="北京卫视" tvg-name="北京卫视" tvg-logo="https://png-1hf.pages.dev/北京卫视.png" group-title="📡卫视频道",北京卫视
 http://221.7.175.154:85/tsfile/live/0136_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://png-1hf.pages.dev/东方卫视.png" group-title="📡卫视频道",东方卫视
@@ -191,7 +191,7 @@ http://123.157.31.182:7912/rtp/233.50.202.109:5140
 #EXTINF:-1 tvg-name="爱上4K" tvg-logo="https://png-1hf.pages.dev/爱上4K.png" group-title="📡4K专区",爱上4K
 http://www.alihomes.top:8188/rtp/239.254.96.193:8182
 #EXTINF:-1 tvg-name="淘4K" tvg-logo="https://png-1hf.pages.dev/淘4K.png" group-title="📡4K专区",淘4K
-http://vpn.famcloud.top:9878/rtp/239.3.1.249:8001
+http://123.120.49.149:4022/rtp/239.3.1.249:8001
 #EXTINF:-1 tvg-id="多彩文体4K" tvg-name="多彩文体4K" tvg-logo="https://png-1hf.pages.dev/多彩文体4K.png" group-title="📡4K专区",多彩文体4K
 http://home.660888.xyz:4000/udp/225.0.4.234:7980 # 已失效
 #EXTINF:-1 tvg-id="CCTV-5" tvg-name="CCTV-5 体育" tvg-logo="https://png-1hf.pages.dev/CCTV-5 体育.png" group-title="⚽️体育频道",CCTV-5 体育
@@ -241,13 +241,13 @@ http://112.27.5.218:9901/tsfile/live/faacts/1038_1.m3u8?key=txiptv&playlive=1&au
 #EXTINF:-1 tvg-name="重温经典" tvg-logo="https://png-1hf.pages.dev/重温经典.png" group-title="🎞️数字影视",重温经典
 http://221.7.49.226:50085/tsfile/live/0018_3.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="淘电影" tvg-logo="https://png-1hf.pages.dev/淘电影.png" group-title="🎞️数字影视",淘电影
-http://vpn.famcloud.top:9878/rtp/239.3.1.250:8001
+http://123.120.49.149:4022/rtp/239.3.1.250:8001
 #EXTINF:-1 tvg-name="淘剧场" tvg-logo="https://png-1hf.pages.dev/淘剧场.png" group-title="🎞️数字影视",淘剧场
-http://vpn.famcloud.top:9878/rtp/239.3.1.95:8001
+http://123.120.49.149:4022/rtp/239.3.1.95:8001
 #EXTINF:-1 tvg-name="淘娱乐" tvg-logo="https://png-1hf.pages.dev/淘娱乐.png" group-title="🎞️数字影视",淘娱乐
-http://vpn.famcloud.top:9878/rtp/239.3.1.100:8001
+http://123.120.49.149:4022/rtp/239.3.1.100:8001
 #EXTINF:-1 tvg-name="华数热播剧场" tvg-logo="https://png-1hf.pages.dev/华数热播剧场.png" group-title="🎞️数字影视",华数热播剧场
-http://vpn.famcloud.top:9878/rtp/239.3.1.194:9020
+http://123.120.49.149:4022/rtp/239.3.1.194:9020
 #EXTINF:-1 tvg-name="华数谍战剧场" tvg-logo="https://png-1hf.pages.dev/华数谍战剧场.png" group-title="🎞️数字影视",华数谍战剧场
 http://www.alihomes.top:8188/rtp/239.254.96.77:7600
 #EXTINF:-1 tvg-name="IPTV经典电影" tvg-logo="https://png-1hf.pages.dev/IPTV经典电影.png" group-title="🎞️数字影视",IPTV经典电影
@@ -259,9 +259,9 @@ http://www.alihomes.top:8188/rtp/239.254.96.148:8108
 #EXTINF:-1 tvg-name="IPTV武侠剧场" tvg-logo="https://png-1hf.pages.dev/IPTV武侠剧场.png" group-title="🎞️数字影视",IPTV武侠剧场
 http://www.alihomes.top:8188/rtp/239.254.96.92:8706
 #EXTINF:-1 tvg-name="华数星影" tvg-logo="https://png-1hf.pages.dev/星影.png" group-title="🎞️数字影视",华数星影
-http://vpn.famcloud.top:9878/rtp/239.3.1.94:4120
+http://123.120.49.149:4022/rtp/239.3.1.94:4120
 #EXTINF:-1 tvg-name="华数光影" tvg-logo="https://png-1hf.pages.dev/光影.png" group-title="🎞️数字影视",华数光影
-http://vpn.famcloud.top:9878/rtp/239.3.1.84:4120
+http://123.120.49.149:4022/rtp/239.3.1.84:4120
 #EXTINF:-1 tvg-name="IPTV精品剧场" tvg-logo="https://png-1hf.pages.dev/IPTV精品剧场.png" group-title="🎞️数字影视",IPTV精品剧场
 http://112.27.5.218:9901/tsfile/live/faacts/1040_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="IPTV-精彩影视" tvg-logo="https://png-1hf.pages.dev/IPTV-精彩影视.png" group-title="🎞️数字影视",IPTV-精彩影视
@@ -279,13 +279,13 @@ http://123.157.31.182:7912/rtp/233.50.201.191:5140
 #EXTINF:-1 tvg-name="求索记录" tvg-logo="https://png-1hf.pages.dev/求索记录.png" group-title="🎞️数字影视",求索记录
 http://58.17.134.3:8005/udp/225.0.4.232:7980
 #EXTINF:-1 tvg-name="淘BABY" tvg-logo="https://png-1hf.pages.dev/淘BABY.png" group-title="🎞️少儿频道",淘BABY
-http://vpn.famcloud.top:9878/rtp/239.3.1.238:8001
+http://123.120.49.149:4022/rtp/239.3.1.238:8001
 #EXTINF:-1 tvg-name="华数少儿动画" tvg-logo="https://png-1hf.pages.dev/华数少儿动画.png" group-title="🎞️少儿频道",华数少儿动画
 http://www.alihomes.top:8188/rtp/239.254.96.79:7616
 #EXTINF:-1 tvg-name="卡酷少儿" tvg-logo="https://png-1hf.pages.dev/卡酷少儿.png" group-title="🎞️少儿频道",卡酷少儿
 http://103.72.172.253:8041/hls/385413834/index.m3u8
 #EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://png-1hf.pages.dev/嘉佳卡通.png" group-title="🎞️少儿频道",嘉佳卡通
-http://vpn.famcloud.top:9878/rtp/239.3.1.147:9268
+http://123.120.49.149:4022/rtp/239.3.1.147:9268
 #EXTINF:-1 tvg-name="金色学堂" tvg-logo="https://png-1hf.pages.dev/金色学堂.png" group-title="🎞️少儿频道",金色学堂
 http://112.27.5.218:9901/tsfile/live/faacts/1051_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="动漫秀场" tvg-logo="https://png-1hf.pages.dev/动漫秀场.png" group-title="🎞️少儿频道",动漫秀场
