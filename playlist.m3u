@@ -67,7 +67,7 @@ http://198.204.228.26/live/dszn.m3u8
 #EXTINF:-1 tvg-id="老故事" tvg-name="中央新影-老故事" tvg-logo="https://png-1hf.pages.dev/中央新影-老故事.png" group-title="📺央视频道",中央新影-老故事
 http://198.204.228.26/live/lgs.m3u8
 #EXTINF:-1 tvg-id="中学生" tvg-name="中央新影-中学生" tvg-logo="https://png-1hf.pages.dev/中央新影-中学生.png" group-title="📺央视频道",中央新影-中学生
-http://58.17.134.3:8005/udp/225.0.4.184:7980
+http://home.660888.xyz:4000/udp/225.0.4.184:7980
 #EXTINF:-1 tvg-id="发现之旅" tvg-name="中央新影-发现之旅" tvg-logo="https://png-1hf.pages.dev/中央新影-发现之旅.png" group-title="📺央视频道",中央新影-发现之旅
 http://198.204.228.26/live/fxzl.m3u8
 #EXTINF:-1 tvg-id="CETV1" tvg-name="CETV1" tvg-logo="https://png-1hf.pages.dev/CETV1.png" group-title="📺央视频道",CETV1
@@ -229,7 +229,7 @@ http://cdn6.163189.xyz/163189/amty
 #EXTINF:-1 tvg-id="快乐垂钓" tvg-name="快乐垂钓" tvg-logo="https://png-1hf.pages.dev/快乐垂钓.png" group-title="⚽️体育频道",快乐垂钓
 http://123.157.31.182:7912/rtp/233.50.201.109:5140
 #EXTINF:-1 tvg-id="汽摩" tvg-name="汽摩" tvg-logo="https://png-1hf.pages.dev/汽摩.png" group-title="⚽️体育频道",汽摩
-http://58.17.134.3:8005/udp/225.0.4.195:7980
+http://home.660888.xyz:4000/udp/225.0.4.195:7980
 #EXTINF:-1 tvg-id="游戏风云" tvg-name="游戏风云" tvg-logo="https://png-1hf.pages.dev/游戏风云.png" group-title="⚽️体育频道",游戏风云
 http://123.157.31.182:7912/rtp/233.50.201.183:5140
 #EXTINF:-1 tvg-name="CHC动作电影" tvg-logo="https://png-1hf.pages.dev/CHC动作电影.png" group-title="🎞️数字影视",CHC动作电影
@@ -277,7 +277,7 @@ http://116.128.243.121:85/tsfile/live/1006_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="法治天地" tvg-logo="https://png-1hf.pages.dev/法治天地.png" group-title="🎞️数字影视",法治天地
 http://123.157.31.182:7912/rtp/233.50.201.191:5140
 #EXTINF:-1 tvg-name="求索记录" tvg-logo="https://png-1hf.pages.dev/求索记录.png" group-title="🎞️数字影视",求索记录
-http://58.17.134.3:8005/udp/225.0.4.232:7980
+http://home.660888.xyz:4000/udp/225.0.4.232:7980
 #EXTINF:-1 tvg-name="淘BABY" tvg-logo="https://png-1hf.pages.dev/淘BABY.png" group-title="🎞️少儿频道",淘BABY
 http://123.120.49.149:4022/rtp/239.3.1.238:8001
 #EXTINF:-1 tvg-name="华数少儿动画" tvg-logo="https://png-1hf.pages.dev/华数少儿动画.png" group-title="🎞️少儿频道",华数少儿动画
@@ -295,7 +295,7 @@ http://110.72.74.180:808/hls/31/index.m3u8 # 已失效
 #EXTINF:-1 tvg-name="金鹰卡通" tvg-logo="https://png-1hf.pages.dev/金鹰卡通.png" group-title="🎞️少儿频道",金鹰卡通
 http://221.7.175.154:85/tsfile/live/1016_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="优优宝贝" tvg-logo="https://png-1hf.pages.dev/优优宝贝.png" group-title="🎞️少儿频道",优优宝贝
-http://58.17.134.3:8005/udp/225.0.4.126:7980
+http://home.660888.xyz:4000/udp/225.0.4.126:7980
 #EXTINF:-1 tvg-id="凤凰卫视中文台" tvg-name="凤凰卫视中文台" tvg-logo="https://png-1hf.pages.dev/凤凰中文台.png" group-title="☘️港澳台",凤凰卫视中文台
 http://221.7.175.154:85/tsfile/live/1020_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="凤凰卫视香港台" tvg-name="凤凰卫视香港台" tvg-logo="https://png-1hf.pages.dev/凤凰香港台.png" group-title="☘️港澳台",凤凰卫视香港台
