@@ -143,7 +143,7 @@ http://60.30.67.45:8834/udp/225.1.1.32:5002 # 已失效
 #EXTINF:-1 tvg-id="宁夏卫视" tvg-name="宁夏卫视" tvg-logo="https://png-1hf.pages.dev/宁夏卫视.png" group-title="📡卫视频道",宁夏卫视
 http://110.72.68.32:808/hls/50/index.m3u8
 #EXTINF:-1 tvg-id="青海卫视" tvg-name="青海卫视" tvg-logo="https://png-1hf.pages.dev/青海卫视.png" group-title="📡卫视频道",青海卫视
-http://110.72.85.120:808/hls/3/index.m3u8
+http://110.72.68.32:808/hls/3/index.m3u8
 #EXTINF:-1 tvg-id="黑龙江卫视" tvg-name="黑龙江卫视" tvg-logo="https://png-1hf.pages.dev/黑龙江卫视.png" group-title="📡卫视频道",黑龙江卫视
 http://221.7.175.154:85/tsfile/live/0131_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="吉林卫视" tvg-name="吉林卫视" tvg-logo="https://png-1hf.pages.dev/吉林卫视.png" group-title="📡卫视频道",吉林卫视
