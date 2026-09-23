@@ -265,7 +265,7 @@ http://vpn.famcloud.top:9878/rtp/239.3.1.84:4120
 #EXTINF:-1 tvg-name="IPTV精品剧场" tvg-logo="https://png-1hf.pages.dev/IPTV精品剧场.png" group-title="🎞️数字影视",IPTV精品剧场
 http://112.27.5.218:9901/tsfile/live/faacts/1040_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-name="IPTV-精彩影视" tvg-logo="https://png-1hf.pages.dev/IPTV-精彩影视.png" group-title="🎞️数字影视",IPTV-精彩影视
-http://112.27.5.218:9901/tsfile/live/faacts/1040_1.m3u8?key=txiptv&playlive=1&authid=0
+http://112.27.5.218:9901/tsfile/live/faacts/1040_1.m3u8?key=txiptv&playlive=1&authid=0 # 已失效
 #EXTINF:-1 tvg-name="乐游" tvg-logo="https://png-1hf.pages.dev/乐游.png" group-title="🎞️数字影视",乐游
 http://123.157.31.182:7912/rtp/233.50.201.185:5140
 #EXTINF:-1 tvg-name="生活时尚" tvg-logo="https://png-1hf.pages.dev/生活时尚.png" group-title="🎞️数字影视",生活时尚
